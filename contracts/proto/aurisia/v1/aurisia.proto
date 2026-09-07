@@ -1,0 +1,203 @@
+syntax = "proto3";
+
+package aurisia.v1;
+
+option java_multiple_files = true;
+option java_package = "com.aurisia.contracts.v1";
+
+enum VoiceActivityState {
+  VOICE_ACTIVITY_STATE_UNSPECIFIED = 0;
+  VOICE_ACTIVITY_STATE_SILENCE = 1;
+  VOICE_ACTIVITY_STATE_SPEECH_START = 2;
+  VOICE_ACTIVITY_STATE_SPEECH_CONTINUE = 3;
+  VOICE_ACTIVITY_STATE_SPEECH_END = 4;
+}
+
+enum Direction {
+  DIRECTION_UNSPECIFIED = 0;
+  DIRECTION_UNKNOWN = 1;
+  DIRECTION_LEFT = 2;
+  DIRECTION_CENTER = 3;
+  DIRECTION_RIGHT = 4;
+}
+
+enum Priority {
+  PRIORITY_UNSPECIFIED = 0;
+  PRIORITY_INFORMATION = 1;
+  PRIORITY_CONVERSATION = 2;
+  PRIORITY_ATTENTION = 3;
+  PRIORITY_VEHICLE = 4;
+  PRIORITY_DANGER = 5;
+}
+
+enum PerceptionKind {
+  PERCEPTION_KIND_UNSPECIFIED = 0;
+  PERCEPTION_KIND_SPEECH = 1;
+  PERCEPTION_KIND_SOUND = 2;
+}
+
+message ModelDescriptor {
+  string model_id = 1;
+  string version = 2;
+  string runtime = 3;
+}
+
+message AudioFrame {
+  string stream_id = 1;
+  uint64 sequence = 2;
+  uint64 captured_at_ms = 3;
+  uint32 sample_rate_hz = 4;
+  uint32 channels = 5;
+  bytes pcm_s16le = 6;
+}
+
+message VoiceActivity {
+  string stream_id = 1;
+  uint64 frame_sequence = 2;
+  VoiceActivityState state = 3;
+  float probability = 4;
+  uint64 observed_at_ms = 5;
+}
+
+message SpeechSegment {
+  string segment_id = 1;
+  string stream_id = 2;
+  uint64 start_time_ms = 3;
+  uint64 end_time_ms = 4;
+  uint32 sample_rate_hz = 5;
+  uint32 channels = 6;
+  bytes pcm_s16le = 7;
+}
+
+message TranscriptEvent {
+  string event_id = 1;
+  string stream_id = 2;
+  uint64 start_time_ms = 3;
+  uint64 end_time_ms = 4;
+  string raw_text = 5;
+  string display_text = 6;
+  string locale = 7;
+  optional float confidence = 8;
+  bool is_final = 9;
+  ModelDescriptor model = 10;
+}
+
+message SoundEvent {
+  string event_id = 1;
+  string stream_id = 2;
+  uint64 start_time_ms = 3;
+  uint64 end_time_ms = 4;
+  string label = 5;
+  string display_label = 6;
+  optional float confidence = 7;
+  ModelDescriptor model = 8;
+}
+
+message DirectionEstimate {
+  string source_event_id = 1;
+  Direction direction = 2;
+  optional float angle_degrees = 3;
+  optional float confidence = 4;
+  ModelDescriptor model = 5;
+}
+
+message PerceptionEvent {
+  string event_id = 1;
+  string source_event_id = 2;
+  PerceptionKind kind = 3;
+  string title = 4;
+  string icon = 5;
+  Priority priority = 6;
+  string color = 7;
+  Direction direction = 8;
+  uint64 start_time_ms = 9;
+  uint64 end_time_ms = 10;
+  uint32 lifetime_ms = 11;
+  optional float confidence = 12;
+}
+
+message StreamRequest {
+  string device_id = 1;
+  uint32 sample_rate_hz = 2;
+  uint32 channels = 3;
+  uint32 frame_duration_ms = 4;
+  uint32 queue_capacity = 5;
+}
+
+message ListAudioDevicesRequest {}
+
+message AudioDevice {
+  string id = 1;
+  string name = 2;
+  string host_api = 3;
+  uint32 max_input_channels = 4;
+  double default_sample_rate_hz = 5;
+  bool is_default = 6;
+}
+
+message AudioDeviceList {
+  repeated AudioDevice devices = 1;
+}
+
+message SpeechInput {
+  oneof payload {
+    AudioFrame frame = 1;
+    VoiceActivity activity = 2;
+  }
+}
+
+message LocalizationInput {
+  oneof payload {
+    AudioFrame frame = 1;
+    TranscriptEvent transcript = 2;
+    SoundEvent sound = 3;
+  }
+}
+
+message PerceptionInput {
+  oneof payload {
+    TranscriptEvent transcript = 1;
+    SoundEvent sound = 2;
+    DirectionEstimate direction = 3;
+  }
+}
+
+message HealthRequest {}
+
+message HealthResponse {
+  string service_name = 1;
+  string version = 2;
+  bool ready = 3;
+  repeated string capabilities = 4;
+}
+
+service AudioCapture {
+  rpc StreamAudio(StreamRequest) returns (stream AudioFrame);
+  rpc ListDevices(ListAudioDevicesRequest) returns (AudioDeviceList);
+  rpc Health(HealthRequest) returns (HealthResponse);
+}
+
+service VoiceActivityDetection {
+  rpc Detect(stream AudioFrame) returns (stream VoiceActivity);
+  rpc Health(HealthRequest) returns (HealthResponse);
+}
+
+service SpeechRecognition {
+  rpc Recognize(stream SpeechInput) returns (stream TranscriptEvent);
+  rpc Health(HealthRequest) returns (HealthResponse);
+}
+
+service SoundDetection {
+  rpc Detect(stream AudioFrame) returns (stream SoundEvent);
+  rpc Health(HealthRequest) returns (HealthResponse);
+}
+
+service Localization {
+  rpc Estimate(stream LocalizationInput) returns (stream DirectionEstimate);
+  rpc Health(HealthRequest) returns (HealthResponse);
+}
+
+service PerceptionFusion {
+  rpc Fuse(stream PerceptionInput) returns (stream PerceptionEvent);
+  rpc Health(HealthRequest) returns (HealthResponse);
+}

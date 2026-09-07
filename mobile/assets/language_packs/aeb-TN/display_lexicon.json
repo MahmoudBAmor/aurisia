@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "replacements": {
+    "rendez-vous": "رونديفو",
+    "mise à jour": "ميزاجور",
+    "parking": "باركينغ",
+    "téléphone": "تليفون",
+    "WhatsApp": "واتساب",
+    "pharmacie": "فارماسي",
+    "pharmacies": "فارماسي",
+    "panadol": "بانادول",
+    "panadole": "بانادول",
+    "panadol extra": "بانادول إكسترا",
+    "bannadol": "بانادول",
+    "باكو قراندور": "باكو بانادول",
+    "باكو باندال": "باكو بانادول",
+    "باكو باندولا": "باكو بانادول",
+    "paracetamol": "باراسيتامول",
+    "paracétamol": "باراسيتامول",
+    "doliprane": "دوليبران",
+    "doleprane": "دوليبران",
+    "للفارمسي": "للفارماسي",
+    "الفرمسي": "الفارماسي",
+    "paquet": "باكو",
+    "appel": "آبال",
+    "dispo": "ديسبو",
+    "marche arrière": "مارش أريار",
+    "marche arriere": "مارش أريار",
+    "lavabo": "لافابو",
+    "lavabou": "لافابو"
+  }
+}

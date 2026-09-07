@@ -1,0 +1,23 @@
+schema_version: 1
+pack_id: linto-asr-ar-tn-android
+version: "0.1+8ad50ec"
+runtime: vosk/0.3.45
+license: Apache-2.0
+source: https://huggingface.co/linagora/linto-asr-ar-tn-0.1/tree/8ad50ec266ecfba2aec33579b4434384c97eb49a
+locale: aeb-TN
+supported_hardware:
+  - cpu-x86_64
+  - cpu-arm64
+input:
+  sample_rate_hz: 16000
+  channels: 1
+  sample_format: pcm_s16le
+  window_samples: null
+reference_benchmark: null
+artifacts:
+  - name: vosk_model
+    path: android-model
+    kind: directory
+    # SHA-256 over sorted relative path, NUL, size, NUL, and file bytes.
+    sha256: 72f2f0f004ca112fc763b509693374f3dcd12053952f522e9b03fd2731f93be8
+    size_bytes: 278892054

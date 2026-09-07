@@ -1,0 +1,22 @@
+schema_version: 1
+pack_id: openai-whisper-small-q5_1
+version: c521a4b02f422512d734391fdf08bb08c0862f68
+runtime: whisper.cpp/1.8.5
+license: MIT
+source: https://huggingface.co/ggerganov/whisper.cpp/blob/c521a4b02f422512d734391fdf08bb08c0862f68/ggml-small-q5_1.bin
+locale: multilingual
+supported_hardware:
+  - cpu-x86_64
+  - cpu-arm64
+input:
+  sample_rate_hz: 16000
+  channels: 1
+  sample_format: pcm_s16le
+  window_samples: null
+# Filled after the Tunisian evaluation corpus is agreed and measured.
+reference_benchmark: null
+artifacts:
+  - name: whisper_model
+    path: ggml-small-q5_1.bin
+    sha256: ae85e4a935d7a567bd102fe55afc16bb595bdb618e11b2fc7591bc08120411bb
+    size_bytes: 190085487

@@ -1,0 +1,74 @@
+schema_version: 1
+
+runtime:
+  offline: true
+  # --live supervises microphone capture on loopback. The selected Vosk
+  # adapter is native/in-process; the Whisper fallback has its own supervisor.
+  transport: in_process
+  audio_queue_capacity: 256
+
+audio:
+  device: default
+  sample_rate_hz: 16000
+  channels: 1
+  frame_duration_ms: 20
+  ring_buffer_seconds: 30
+  reconnect_delay_ms: 1000
+  grpc_endpoint: 127.0.0.1:50051
+
+normalization:
+  sample_rate_hz: 16000
+  channels: 1
+  frame_duration_ms: 20
+  quality: HQ
+
+vad:
+  # Used only by the energy fallback. The active Silero model outputs its own
+  # speech probability after canonical 16 kHz mono normalization.
+  energy_reference_rms: 450.0
+  start_probability: 0.5
+  end_probability: 0.35
+  # Nine Silero windows are about 288 ms at 16 kHz.
+  end_silence_frames: 9
+  model_manifest_path: ../models/silero-vad-v6.2.1/manifest.yaml
+
+speech:
+  # The active adapter decodes VAD-delimited 16 kHz mono frames incrementally.
+  # Complete-segment Whisper settings remain available for an adapter swap.
+  model_manifest_path: ../models/linto-asr-ar-tn-android-v0.1/manifest.yaml
+  executable_path: ../runtimes/whisper.cpp-v1.8.5/whisper-server.exe
+  executable_sha256: 3940709f1d3df485af0c7f2972ed82ca617df0386c63fcd87199902365083407
+  endpoint: 127.0.0.1:50052
+  language: ar
+  threads: 4
+  startup_timeout_seconds: 30
+  timeout_seconds: 60
+  minimum_segment_ms: 300
+  pre_roll_ms: 300
+  # Update the HUD during uninterrupted speech and bound every decoder session.
+  partial_interval_ms: 750
+  maximum_segment_ms: 30000
+
+platform:
+  os: windows_11
+  architecture: x86_64
+  gpu_required: false
+  reference_ram_gb: 16
+
+language:
+  locale: aeb-TN
+  display_mode: arabic
+  direction: rtl
+  digits: european
+  lexicon_path: ../language_packs/aeb-TN/lexicon.yaml
+
+models:
+  vad_adapter: silero_onnx
+  speech_adapter: linto_vosk
+  sound_adapter: scripted_sound
+  localization_adapter: deterministic_direction
+
+hud:
+  fps: 60
+  click_through: true
+  event_lifetime_ms: 4000

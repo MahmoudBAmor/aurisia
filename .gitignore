@@ -1,0 +1,87 @@
+__pycache__/
+*.py[cod]
+*.egg-info/
+.coverage
+.mypy_cache/
+.pytest_cache/
+.ruff_cache/
+.venv/
+build/
+/build
+dist/
+.tox/
+.hypothesis/
+
+# Model directories are metadata allowlists. Weights, extracted graphs, tokens,
+# archives, and sample audio are installed locally from pinned manifests.
+models/**
+!models/
+!models/**/
+!models/**/README.md
+!models/**/LICENSE
+!models/**/LICENSE.*
+!models/**/NOTICE
+!models/**/NOTICE.*
+!models/**/manifest.json
+!models/**/manifest.yaml
+
+# Native runtimes follow the same metadata-only source-control policy.
+runtimes/**
+!runtimes/
+!runtimes/**/
+!runtimes/**/README.md
+!runtimes/**/LICENSE
+!runtimes/**/LICENSE.*
+!runtimes/**/NOTICE
+!runtimes/**/NOTICE.*
+!runtimes/**/manifest.json
+!runtimes/**/manifest.yaml
+
+# Local evaluation material may contain private speech or third-party text.
+recordings/
+transcript.json
+console.txt
+context.txt
+*.wav
+*.mp3
+*.m4a
+*.flac
+
+# Flutter/Dart build and tool state.
+mobile/.dart_tool/
+mobile/.flutter-plugins-dependencies
+mobile/build/
+/mobile/build
+mobile/coverage/
+mobile/android/local.properties
+mobile/android/key.properties
+mobile/assets/model_packs/**
+!mobile/assets/model_packs/
+!mobile/assets/model_packs/**/
+!mobile/assets/model_packs/**/README.md
+!mobile/assets/model_packs/**/MODEL_CARD.md
+!mobile/assets/model_packs/**/LICENSE
+!mobile/assets/model_packs/**/LICENSE.*
+!mobile/assets/model_packs/**/NOTICE
+!mobile/assets/model_packs/**/NOTICE.*
+!mobile/assets/model_packs/**/manifest.json
+# The active Qwen tokenizer is small Apache-2.0 metadata required by Flutter's
+# declared tokenizer asset directory; the large encoder/decoder stay ignored.
+!mobile/assets/model_packs/qwen3-asr-0.6B-int8/tokenizer/
+!mobile/assets/model_packs/qwen3-asr-0.6B-int8/tokenizer/*.json
+!mobile/assets/model_packs/qwen3-asr-0.6B-int8/tokenizer/merges.txt
+
+# Signing material and local configuration must never enter source control.
+.env
+.env.*
+!.env.example
+*.jks
+*.keystore
+*.p12
+*.pfx
+*.pem
+*.key
+
+# Installable artifacts are published through a release channel, not Git.
+*.apk
+*.aab

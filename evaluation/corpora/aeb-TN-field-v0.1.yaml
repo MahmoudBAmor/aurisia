@@ -1,0 +1,78 @@
+schema_version: 1
+corpus_id: aeb-tn-field-v0_1
+version: "0.1.0"
+locale: aeb-TN
+display_mode: arabic
+
+# Initial phrases supplied during desktop testing. References are deliberately
+# separate from prompts so spelling and display policy can evolve without
+# renaming private local recordings.
+cases:
+  - id: return_quickly
+    prompt_arabizi: "kifech aamelt bech tarja3 fissa3"
+    reference_arabic: "كيفاش عملت باش ترجع فيسع"
+    code_switch_terms: []
+
+  - id: welcome
+    prompt_arabizi: "chna7welek aya tfedhal mar7ba"
+    reference_arabic: "شنحوالك آيا تفضل مرحبا"
+    code_switch_terms: []
+
+  - id: pharmacy_item
+    prompt_arabizi: "emchi lel pharmacie w 9ollou a3tini el 9adhya elli wessaytek 3liha"
+    reference_arabic: "امشي للفارماسي وقلو أعطيني القضية اللي وصيتك عليها"
+    code_switch_terms:
+      - ["فارماسي", "pharmacie"]
+
+  - id: call_before_leaving
+    prompt_arabizi: "9bal ma tokhrej a3melli appel"
+    reference_arabic: "قبل ما تخرج اعملي آبال"
+    code_switch_terms:
+      - ["آبال", "ابال", "appel"]
+
+  - id: call_when_available
+    prompt_arabizi: "ki tebda dispo bellehi kallamni"
+    reference_arabic: "كي تبدا ديسبو باللهي كلمني"
+    code_switch_terms:
+      - ["ديسبو", "dispo"]
+
+  - id: pharmacy_return
+    prompt_arabizi: "emchi lel pharmacie w ija"
+    reference_arabic: "امشي للفارماسي وإيجا"
+    code_switch_terms:
+      - ["فارماسي", "pharmacie"]
+
+  - id: reverse
+    prompt_arabizi: "tra a3mel marche arrière w arja3"
+    reference_arabic: "ترا اعمل مارش أريار وارجع"
+    code_switch_terms:
+      - ["مارش أريار", "marche arrière", "marche arriere"]
+
+  - id: find_mohsen
+    prompt_arabizi: "assalemou 3alaykom, win nel9a si Mo7ssen"
+    reference_arabic: "السلام عليكم وين نلقى سي محسن"
+    code_switch_terms: []
+
+  - id: how_did_you_know
+    prompt_arabizi: "kifech 3raft li heka houa"
+    reference_arabic: "كيفاش عرفت اللي هذا هو"
+    code_switch_terms: []
+
+  - id: introduce_names
+    prompt_arabizi: "Ena esmi mahmoud w enti chessmek"
+    reference_arabic: "أنا اسمي محمود وإنتي شسمك"
+    code_switch_terms: []
+
+  - id: clean_sink
+    prompt_arabizi: "Barra nadhaf el lavabou"
+    reference_arabic: "برا نظف اللافابو"
+    code_switch_terms:
+      - ["لافابو", "lavabo", "lavabou"]
+
+  - id: pharmacy_panadol
+    prompt_arabizi: "barra akhtaf rou7ek lel pharmacie jib bakkou panadol"
+    reference_arabic: "برا اخطف روحك للفارماسي جيب باكو بانادول"
+    code_switch_terms:
+      - ["فارماسي", "الفارماسي", "لفارماسي", "للفارماسي", "pharmacie"]
+      - ["باكو", "الباكو", "paquet"]
+      - ["بانادول", "panadol", "panadole"]

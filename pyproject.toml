@@ -1,0 +1,88 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "aurisia"
+version = "0.1.0"
+description = "Offline, modular auditory perception platform"
+readme = "README.md"
+requires-python = ">=3.10"
+authors = [{ name = "Mahmoud Ben Amor" }]
+license = { file = "LICENSE" }
+keywords = ["accessibility", "arabic", "offline", "speech-recognition", "tunisian"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "License :: OSI Approved :: Apache Software License",
+  "Operating System :: Microsoft :: Windows :: Windows 11",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Topic :: Multimedia :: Sound/Audio :: Speech",
+]
+dependencies = [
+  "PyYAML>=6.0,<7",
+]
+
+[project.optional-dependencies]
+desktop = [
+  "PySide6-Essentials>=6.8,<7",
+]
+audio = [
+  "sounddevice>=0.5,<1",
+]
+transport = [
+  "grpcio>=1.67,<2",
+  "grpcio-health-checking>=1.67,<2",
+  "protobuf>=5,<7",
+]
+inference = [
+  "numpy>=1.26,<2.3",
+  "onnxruntime>=1.20,<2",
+  "sherpa-onnx==1.13.2",
+  "soxr>=0.5,<2",
+  "vosk==0.3.45",
+]
+dev = [
+  "grpcio-tools>=1.67,<2",
+  "mypy>=1.11,<2",
+  "pytest>=8,<9",
+  "ruff>=0.8,<1",
+  "types-grpcio>=1.0,<2",
+  "types-grpcio-health-checking>=1.0,<2",
+  "types-PyYAML>=6.0,<7",
+]
+
+[project.scripts]
+aurisia = "aurisia.cli:main"
+aurisia-audio-service = "aurisia.services.audio.grpc_server:main"
+aurisia-desktop = "aurisia.apps.desktop.main:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+"aurisia.apps.desktop" = ["qml/*.qml"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+extend-exclude = ["src/aurisia/v1", "mobile/**/ephemeral"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM"]
+
+[tool.mypy]
+python_version = "3.10"
+strict = true
+warn_unreachable = true
+exclude = ["src/aurisia/v1"]
+
+[[tool.mypy.overrides]]
+module = ["aurisia.v1.*"]
+ignore_errors = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"

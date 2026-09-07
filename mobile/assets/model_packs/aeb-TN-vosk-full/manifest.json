@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "pack_id": "aurisia-mobile-aeb-TN-vosk-full",
+  "version": "1.0.0",
+  "locale": "aeb-TN",
+  "runtime": "vosk-android/0.3.75",
+  "artifacts": [
+    {
+      "role": "asr_vosk_model",
+      "kind": "zip_directory",
+      "path": "STT_Tun_Model.zip",
+      "license": "Apache-2.0",
+      "source": "https://huggingface.co/Sali7a8603/Tunisian_STT/resolve/4ff4f5c84d7cc3065818202b6194b3c52084663d/STT_Tun_Model.zip",
+      "sha256": "64e999b1bc27237e714ff6650fc7bd86d5ce10eb8d410c3495f46496da5d577d",
+      "size_bytes": 541801652,
+      "output_path": "vosk-model",
+      "archive_prefix": "vosk-model",
+      "output_sha256": "14f525a4f6670814a2261a4ef7b260ec61d9fbcbba241dd396a025a2fd82d599",
+      "output_size_bytes": 1459583859
+    },
+    {
+      "role": "vad_model",
+      "path": "silero_vad.onnx",
+      "license": "MIT",
+      "source": "https://github.com/snakers4/silero-vad/tree/v6.2.1",
+      "sha256": "1a153a22f4509e292a94e67d6f9b85e8deb25b4988682b7e174c65279d8788e3",
+      "size_bytes": 2327524
+    },
+    {
+      "role": "speaker_model",
+      "path": "speaker_embedding.onnx",
+      "license": "Apache-2.0",
+      "source": "https://github.com/modelscope/3D-Speaker",
+      "sha256": "1a331345f04805badbb495c775a6ddffcdd1a732567d5ec8b3d5749e3c7a5e4b",
+      "size_bytes": 39593761
+    }
+  ]
+}

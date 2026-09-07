@@ -1,0 +1,14 @@
+schema_version: 1
+pack_id: aeb-TN.development
+locale: aeb-TN
+display_name: تونسي
+display_mode: arabic
+direction: rtl
+status: development
+code_switch_languages:
+  - fr-FR
+  - en-US
+artifacts: []
+
+# A real ASR artifact will only be added after accuracy, latency, checksum, and
+# licensing validation on the reference Windows 11 CPU.

@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "pack_id": "aurisia-mobile-ar-Quran-whisper-base-int8",
+  "version": "a0e6feae0693",
+  "locale": "ar",
+  "runtime": "sherpa-onnx/1.13.6",
+  "artifacts": [
+    {
+      "role": "asr_whisper_encoder",
+      "path": "encoder.int8.onnx",
+      "license": "Apache-2.0",
+      "source": "https://huggingface.co/Synthesium/quran-whisper-sherpa-onnx/tree/a0e6feae0693a70365cd7d9d777f85dbd9ec417d",
+      "sha256": "735f70bcc77ce09dcce1d699b876d0bb4db21171698a845cee894e0c2807cea2",
+      "size_bytes": 29104815
+    },
+    {
+      "role": "asr_whisper_decoder",
+      "path": "decoder.int8.onnx",
+      "license": "Apache-2.0",
+      "source": "https://huggingface.co/Synthesium/quran-whisper-sherpa-onnx/tree/a0e6feae0693a70365cd7d9d777f85dbd9ec417d",
+      "sha256": "1b19292bee6eb2bd1514aa80793b580303b2868f8596ccf1bce79c46f3128c2b",
+      "size_bytes": 130659024
+    },
+    {
+      "role": "asr_whisper_tokens",
+      "path": "tokens.txt",
+      "license": "Apache-2.0",
+      "source": "https://huggingface.co/Synthesium/quran-whisper-sherpa-onnx/tree/a0e6feae0693a70365cd7d9d777f85dbd9ec417d",
+      "sha256": "b34b360dbb493e781e479794586d661700670d65564001f23024971d1f2fa126",
+      "size_bytes": 816730
+    }
+  ]
+}

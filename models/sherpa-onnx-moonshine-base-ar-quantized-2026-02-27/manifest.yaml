@@ -1,0 +1,41 @@
+schema_version: 1
+pack_id: moonshine-base-ar-quantized
+version: "2026-02-27"
+runtime: sherpa-onnx/1.13.2
+license: Moonshine AI Community License (evaluation only)
+source: https://github.com/k2-fsa/sherpa-onnx/releases/tag/asr-models
+locale: ar
+supported_hardware:
+  - cpu-x86_64
+  - cpu-arm64
+input:
+  sample_rate_hz: 16000
+  channels: 1
+  sample_format: pcm_s16le
+  window_samples: null
+# One official 6.546-second Arabic sample. Tunisian accuracy is not represented.
+reference_benchmark:
+  hardware: 11th Gen Intel Core i7-1165G7
+  os: Windows 11 x64
+  measured_at: "2026-07-30"
+  duration_seconds: 6.546
+  inference_count: 1
+  mean_latency_ms: 457
+  maximum_latency_ms: 457
+artifacts:
+  - name: moonshine_encoder
+    path: encoder_model.ort
+    sha256: 68e50ebe0317ce909f098044a5dda2a76e6b86dc882829a317771fbafc5826ae
+    size_bytes: 31326824
+  - name: moonshine_decoder
+    path: decoder_model_merged.ort
+    sha256: 8f272cb50818e28ad86bbffc21e1450a4d57155e95f099ca6a236f38f4d9eafb
+    size_bytes: 109424552
+  - name: tokens
+    path: tokens.txt
+    sha256: 2870d843e14c1e187bf1913a521562a63b53933814bd7f2145120468f494a049
+    size_bytes: 549350
+  - name: license
+    path: LICENSE
+    sha256: 6148d7574a6554b7379b633cfd4c4fe5840c3f548d13bc83e00b52dc6fa00abd
+    size_bytes: 13344

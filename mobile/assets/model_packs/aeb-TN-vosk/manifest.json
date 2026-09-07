@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "pack_id": "aurisia-mobile-aeb-TN-vosk",
+  "version": "0.2.0",
+  "locale": "aeb-TN",
+  "runtime": "vosk-android/0.3.75",
+  "artifacts": [
+    {
+      "role": "asr_vosk_model",
+      "kind": "zip_directory",
+      "path": "android-model.zip",
+      "license": "Apache-2.0",
+      "source": "https://huggingface.co/linagora/linto-asr-ar-tn-0.1/tree/8ad50ec266ecfba2aec33579b4434384c97eb49a",
+      "sha256": "91811df61515172420c583bb901cd6c4c200a6e4fdf3437f539f5dcf851cbd29",
+      "size_bytes": 165666389,
+      "output_path": "android-model",
+      "archive_prefix": "android-model",
+      "output_sha256": "72f2f0f004ca112fc763b509693374f3dcd12053952f522e9b03fd2731f93be8",
+      "output_size_bytes": 278892054
+    },
+    {
+      "role": "vad_model",
+      "path": "silero_vad.onnx",
+      "license": "MIT",
+      "source": "https://github.com/snakers4/silero-vad/tree/v6.2.1",
+      "sha256": "1a153a22f4509e292a94e67d6f9b85e8deb25b4988682b7e174c65279d8788e3",
+      "size_bytes": 2327524
+    },
+    {
+      "role": "speaker_model",
+      "path": "speaker_embedding.onnx",
+      "license": "Apache-2.0",
+      "source": "https://github.com/modelscope/3D-Speaker",
+      "sha256": "1a331345f04805badbb495c775a6ddffcdd1a732567d5ec8b3d5749e3c7a5e4b",
+      "size_bytes": 39593761
+    }
+  ]
+}

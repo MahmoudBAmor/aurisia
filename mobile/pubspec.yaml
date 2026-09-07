@@ -1,0 +1,31 @@
+name: aurisia_mobile
+description: "Offline Tunisian Arabic transcription with session-local speaker attribution."
+publish_to: 'none'
+version: 0.1.0+1
+
+environment:
+  sdk: ^3.13.2
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+  llama_cpp_dart: 0.9.0-dev.12
+  record: 7.1.1
+  sherpa_onnx: 1.13.6
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/language_packs/aeb-TN/
+    - assets/language_packs/ar-formal/
+    - assets/model_packs/aeb-TN-vosk-full/
+    - assets/model_packs/ar-MGB2-vosk/
+    - assets/model_packs/qwen3-asr-0.6B-int8/
+    - assets/model_packs/qwen3-asr-0.6B-int8/tokenizer/

@@ -1,0 +1,28 @@
+schema_version: 1
+pack_id: silero-vad
+version: 6.2.1
+runtime: onnxruntime
+license: MIT
+source: https://github.com/snakers4/silero-vad/tree/v6.2.1
+locale: multilingual
+supported_hardware:
+  - cpu-x86_64
+  - cpu-arm64
+input:
+  sample_rate_hz: 16000
+  channels: 1
+  sample_format: pcm_f32
+  window_samples: 512
+reference_benchmark:
+  hardware: Intel Core i7-1165G7
+  os: Windows 11 x86_64
+  measured_at: "2026-07-29"
+  duration_seconds: 5.0
+  inference_count: 156
+  mean_latency_ms: 0.810
+  maximum_latency_ms: 15.636
+artifacts:
+  - name: silero_vad
+    path: silero_vad.onnx
+    sha256: 1a153a22f4509e292a94e67d6f9b85e8deb25b4988682b7e174c65279d8788e3
+    size_bytes: 2327524

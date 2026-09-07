@@ -1,0 +1,17 @@
+schema_version: 1
+
+# Curated, offline display replacements. This list is intentionally conservative:
+# words not listed here remain untouched in the raw and display transcripts.
+replacements:
+  "rendez-vous": "رونديفو"
+  "mise à jour": "ميزاجور"
+  "parking": "باركينغ"
+  "téléphone": "تليفون"
+  "WhatsApp": "واتساب"
+  "pharmacie": "فارماسي"
+  "appel": "آبال"
+  "dispo": "ديسبو"
+  "marche arrière": "مارش أريار"
+  "marche arriere": "مارش أريار"
+  "lavabo": "لافابو"
+  "lavabou": "لافابو"

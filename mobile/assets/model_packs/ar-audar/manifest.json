@@ -1,0 +1,78 @@
+{
+  "schema_version": 1,
+  "pack_id": "aurisia-mobile-ar-audar",
+  "version": "0.6.0",
+  "locale": "ar",
+  "runtime": "vosk-android/0.3.75+llama.cpp/b10182",
+  "artifacts": [
+    {
+      "role": "asr_vosk_model",
+      "kind": "zip_directory",
+      "path": "android-model.zip",
+      "license": "Apache-2.0",
+      "source": "https://alphacephei.com/vosk/models/vosk-model-ar-mgb2-0.4.zip",
+      "sha256": "357469ae1bb4d7a3810c9cd6b86d33bc135898dfc134e6df8bc2ddd28c5fe77a",
+      "size_bytes": 333241610,
+      "output_path": "android-model",
+      "archive_prefix": "vosk-model-ar-mgb2-0.4",
+      "output_sha256": "6c6d92eb5cece6848c7c0ab7cd8a0f8ffc2a49fd18e0469b452a78b66be55346",
+      "output_size_bytes": 698195675
+    },
+    {
+      "role": "asr_audar_model",
+      "path": "Audar-ASR-V1-Flash-Q8_0.gguf",
+      "license": "AudarAI-Open-1.0",
+      "source": "https://huggingface.co/audarai/Audar-ASR-V1-Flash/resolve/54274d3/Audar-ASR-V1-Flash-Q8_0.gguf",
+      "sha256": "1b01c707fcf162ef8e844a89f0833bd0d005933342e0c37fa8da164497a9fb38",
+      "size_bytes": 639442784
+    },
+    {
+      "role": "asr_audar_projector",
+      "path": "mmproj-Audar-ASR-V1-Flash.gguf",
+      "license": "AudarAI-Open-1.0",
+      "source": "https://huggingface.co/audarai/Audar-ASR-V1-Flash/resolve/54274d3/mmproj-Audar-ASR-V1-Flash.gguf",
+      "sha256": "73f06fc82a009b4a9d6c825782a3676cb553402b3a5ecc27ae77a92caa6b7fa9",
+      "size_bytes": 378575424
+    },
+    {
+      "role": "vad_model",
+      "path": "silero_vad.onnx",
+      "license": "MIT",
+      "source": "https://github.com/snakers4/silero-vad/tree/v6.2.1",
+      "sha256": "1a153a22f4509e292a94e67d6f9b85e8deb25b4988682b7e174c65279d8788e3",
+      "size_bytes": 2327524
+    },
+    {
+      "role": "speaker_model",
+      "path": "speaker_embedding.onnx",
+      "license": "Apache-2.0",
+      "source": "https://github.com/modelscope/3D-Speaker",
+      "sha256": "1a331345f04805badbb495c775a6ddffcdd1a732567d5ec8b3d5749e3c7a5e4b",
+      "size_bytes": 39593761
+    },
+    {
+      "role": "model_license",
+      "path": "LICENSE-AUDARAI-OPEN-1.0.html",
+      "license": "AudarAI-Open-1.0",
+      "source": "https://www.audarai.com/license/audarai-open-license-v1.0/",
+      "sha256": "9df7bb08ec2efe43a1797c2d148e5bfb2197221c1e1d02f869870f8c21ca3fbf",
+      "size_bytes": 32881
+    },
+    {
+      "role": "model_notice",
+      "path": "NOTICE",
+      "license": "AudarAI-Open-1.0",
+      "source": "https://github.com/AudarAI/Audar-ASR-V1/blob/main/NOTICE",
+      "sha256": "d5743476015389b9615301424c8f4d56c6fd213425cca3783fd26d6ebe01f50e",
+      "size_bytes": 1018
+    },
+    {
+      "role": "model_card",
+      "path": "MODEL_CARD.md",
+      "license": "AudarAI-Open-1.0",
+      "source": "https://huggingface.co/audarai/Audar-ASR-V1-Flash/blob/54274d3/README.md",
+      "sha256": "af07f81f82e069faf87773d5ccabec789a8575b0071529659899642ae6c6254a",
+      "size_bytes": 19411
+    }
+  ]
+}

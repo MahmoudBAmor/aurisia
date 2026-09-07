@@ -1,0 +1,6 @@
+# Copy this file to key.properties and keep the real file outside Git.
+# Prefer a keystore path outside the repository.
+storeFile=C:\\secure\\aurisia-upload.jks
+storePassword=replace-with-a-secret
+keyAlias=upload
+keyPassword=replace-with-a-secret

@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "pack_id": "aurisia-mobile-ar-hybrid",
+  "version": "0.5.0",
+  "locale": "ar",
+  "runtime": "vosk-android/0.3.75+sherpa-onnx/1.13.6",
+  "artifacts": [
+    {
+      "role": "asr_vosk_model",
+      "kind": "zip_directory",
+      "path": "android-model.zip",
+      "license": "Apache-2.0",
+      "source": "https://alphacephei.com/vosk/models/vosk-model-ar-mgb2-0.4.zip",
+      "sha256": "357469ae1bb4d7a3810c9cd6b86d33bc135898dfc134e6df8bc2ddd28c5fe77a",
+      "size_bytes": 333241610,
+      "output_path": "android-model",
+      "archive_prefix": "vosk-model-ar-mgb2-0.4",
+      "output_sha256": "6c6d92eb5cece6848c7c0ab7cd8a0f8ffc2a49fd18e0469b452a78b66be55346",
+      "output_size_bytes": 698195675
+    },
+    {
+      "role": "asr_whisper_encoder",
+      "path": "small-encoder.int8.onnx",
+      "license": "Apache-2.0",
+      "source": "https://huggingface.co/csukuangfj/sherpa-onnx-whisper-small/tree/8f3c18b358db4d1f2fc1eae49d75cd20989e4309",
+      "sha256": "4cbe7b22fa9026b843b60a68640c747de05bafb1a11b57edc0e66c232d9f33a9",
+      "size_bytes": 112442483
+    },
+    {
+      "role": "asr_whisper_decoder",
+      "path": "small-decoder.int8.onnx",
+      "license": "Apache-2.0",
+      "source": "https://huggingface.co/csukuangfj/sherpa-onnx-whisper-small/tree/8f3c18b358db4d1f2fc1eae49d75cd20989e4309",
+      "sha256": "acad50b5c782696e91b55914cc5ab4f756f1532f76e22aa6fc615f39fb69a8ee",
+      "size_bytes": 262226114
+    },
+    {
+      "role": "asr_whisper_tokens",
+      "path": "small-tokens.txt",
+      "license": "Apache-2.0",
+      "source": "https://huggingface.co/csukuangfj/sherpa-onnx-whisper-small/tree/8f3c18b358db4d1f2fc1eae49d75cd20989e4309",
+      "sha256": "b34b360dbb493e781e479794586d661700670d65564001f23024971d1f2fa126",
+      "size_bytes": 816730
+    },
+    {
+      "role": "vad_model",
+      "path": "silero_vad.onnx",
+      "license": "MIT",
+      "source": "https://github.com/snakers4/silero-vad/tree/v6.2.1",
+      "sha256": "1a153a22f4509e292a94e67d6f9b85e8deb25b4988682b7e174c65279d8788e3",
+      "size_bytes": 2327524
+    },
+    {
+      "role": "speaker_model",
+      "path": "speaker_embedding.onnx",
+      "license": "Apache-2.0",
+      "source": "https://github.com/modelscope/3D-Speaker",
+      "sha256": "1a331345f04805badbb495c775a6ddffcdd1a732567d5ec8b3d5749e3c7a5e4b",
+      "size_bytes": 39593761
+    }
+  ]
+}
