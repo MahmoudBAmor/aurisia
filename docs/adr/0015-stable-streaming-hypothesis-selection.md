@@ -12,7 +12,7 @@ every non-empty final unconditionally. The optional formal-Arabic refiner had
 the same authority over a good streaming result.
 
 Users also noticed avoidable post-speech delay. Endpoint silence must be short
-enough for live accessibility, without splitting words and natural sermon
+enough for live accessibility, without splitting words and natural formal-speech
 pauses.
 
 ## Decision
@@ -26,8 +26,8 @@ confidence-advantage gate to optional second-pass refinement. A missing score
 is not evidence that a divergent refinement is better.
 
 Keep thresholds in `LiveTranscriptionProfile`, not in Vosk, Whisper, or the UI.
-Use 220 ms endpoint silence for Tunisian conversation and 320 ms for the formal
-sermon profile. Log the selection reason, similarity, and latency without
+Use 220 ms endpoint silence for Tunisian conversation and 320 ms for the
+formal-Arabic profile. Log the selection reason, similarity, and latency without
 logging transcript text or audio.
 
 ## Consequences

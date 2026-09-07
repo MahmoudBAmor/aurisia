@@ -27,7 +27,7 @@ number and a high-contrast color.
   display normalizer. The Tunisian profile does not run a generative second
   pass: field diagnostics showed that Qwen degraded its dialect and French
   code-switching while increasing latency.
-- The sermon profile refines completed turns with Qwen3-ASR 0.6B INT8. It runs
+- The formal-Arabic profile refines completed turns with Qwen3-ASR 0.6B INT8. It runs
   through the pinned sherpa-onnx CPU runtime with the per-stream language hint
   set to `Arabic`; transcript-content hotwords remain empty because field
   testing showed prompt copying and language drift. MGB-2/Vosk provides
@@ -35,12 +35,12 @@ number and a high-contrast color.
   recurrent decoder confusions. The refinement gate accepts plausible recovery
   of a cropped multiword phrase, but rejects one-word completions, excessive
   expansion, and repeated-token generative output.
-- The optional sermon preprocessor detects unusually long, stable phonation (for
+- The optional formal-speech preprocessor detects unusually long, stable phonation (for
   example a deliberately prolonged vowel), retains its onset and ending, and
   shortens only the repetitive middle with a crossfade. Live text and speaker
   attribution continue to use the untouched recording. Qwen3-ASR also receives
   the original waveform because the field trace recovered a three-second
-  prolonged shahada correctly. A corrupt formal hypothesis containing a mixed
+  prolonged vowel correctly. A corrupt formal hypothesis containing a mixed
   Arabic/Latin token is withheld until refinement; legitimate Tunisian
   code-switching remains untouched.
 - The older Audar and Omnilingual adapters remain replaceable comparison
@@ -144,7 +144,7 @@ microphone permission, press the microphone button, and speak Tunisian Arabic.
 Everything after installation runs locally without Internet.
 
 The Tunisian profile closes a turn after about 500 ms of detected silence; the
-sermon profile uses about 550 ms to tolerate rhetorical pauses. Changed partial
+formal-Arabic profile uses about 550 ms to tolerate rhetorical pauses. Changed partial
 text remains visible during that window. The additional context reduces phrase
 fragmentation, false speaker changes on short fragments, and loss of
 code-switch context. Selection diagnostics record confidence decisions and
@@ -153,7 +153,7 @@ latency, but never transcript text or microphone audio.
 Use the language button in the header while recording is stopped to choose:
 
 - `تونسي` for Tunisian conversation and French code-switching;
-- `عربية فصحى • خطبة` for formal Arabic, including sermons. Its first selection
+- `عربية فصحى` for formal Arabic. Its first selection
   takes longer because Android verifies the shared Qwen3 weights and the MGB-2
   archive, then extracts the Vosk model.
 

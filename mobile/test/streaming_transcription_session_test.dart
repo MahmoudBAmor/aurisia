@@ -46,12 +46,12 @@ void main() {
       expect(events.map((event) => event.eventId).toSet(), <String>{
         'mobile-test-live-0',
       });
-      expect(events.first.displayText, 'السلام');
+      expect(events.first.displayText, 'صباح');
       expect(events.first.isFinal, isFalse);
       expect(events.first.speakerIndex, 0);
       expect(events.where((event) => event.isFinal), hasLength(2));
       expect(events[events.length - 2].speakerIndex, 0);
-      expect(events.last.displayText, 'السلام عليكم ورحمة الله');
+      expect(events.last.displayText, 'صباح الخير يا صديقي');
       expect(events.last.speakerIndex, 2);
       expect(asr.startCount, 1);
       expect(asr.finishCount, 1);
@@ -87,8 +87,8 @@ void main() {
       final events = await session.start().toList();
 
       expect(events.where((event) => event.isFinal), hasLength(3));
-      expect(events[events.length - 2].displayText, 'السلام عليكم ورحمة الله');
-      expect(events.last.displayText, 'السلام عليكم ورحمة الله وبركاته');
+      expect(events[events.length - 2].displayText, 'صباح الخير يا صديقي');
+      expect(events.last.displayText, 'صباح الخير يا صديقي جدا');
       expect(events.last.model.id, 'fake-final-asr');
 
       await session.close();
@@ -97,13 +97,13 @@ void main() {
   );
 
   test(
-    'publishes a sermon correction beyond the generic freshness window',
+    'publishes a formal correction beyond the generic freshness window',
     () async {
       final endedAt = DateTime.now().subtract(
         const Duration(milliseconds: 4500),
       );
       final turn = SpeechTurn(
-        id: 'vad-turn-prolonged-sermon',
+        id: 'vad-turn-prolonged-formal-speech',
         streamId: 'mobile-test',
         startedAt: endedAt.subtract(const Duration(milliseconds: 200)),
         endedAt: endedAt,
@@ -125,7 +125,7 @@ void main() {
       final events = await session.start().toList();
 
       expect(events.last.model.id, 'fake-final-asr');
-      expect(events.last.displayText, 'السلام عليكم ورحمة الله وبركاته');
+      expect(events.last.displayText, 'صباح الخير يا صديقي جدا');
       await session.close();
     },
   );
@@ -289,8 +289,8 @@ class _StreamingEngine implements StreamingTranscriptionEngine {
   Future<TranscriptHypothesis> acceptFrame(PcmAudioFrame frame) async {
     acceptedFrames += 1;
     return TranscriptHypothesis(
-      rawText: acceptedFrames == 1 ? 'السلام' : 'السلام عليكم',
-      displayText: acceptedFrames == 1 ? 'السلام' : 'السلام عليكم',
+      rawText: acceptedFrames == 1 ? 'صباح' : 'صباح الخير يا صديقي',
+      displayText: acceptedFrames == 1 ? 'صباح' : 'صباح الخير يا صديقي',
       locale: 'ar',
       model: model,
       isFinal: false,
@@ -301,8 +301,8 @@ class _StreamingEngine implements StreamingTranscriptionEngine {
   Future<TranscriptHypothesis> finishStream() async {
     finishCount += 1;
     return const TranscriptHypothesis(
-      rawText: 'السلام عليكم ورحمة الله',
-      displayText: 'السلام عليكم ورحمة الله',
+      rawText: 'صباح الخير يا صديقي',
+      displayText: 'صباح الخير يا صديقي',
       locale: 'ar',
       model: model,
     );
@@ -404,8 +404,8 @@ class _FinalEngine implements TranscriptionEngine {
   @override
   Future<TranscriptHypothesis> transcribe(SpeechTurn turn) async {
     return const TranscriptHypothesis(
-      rawText: 'السلام عليكم ورحمة الله وبركاته',
-      displayText: 'السلام عليكم ورحمة الله وبركاته',
+      rawText: 'صباح الخير يا صديقي جدا',
+      displayText: 'صباح الخير يا صديقي جدا',
       locale: 'ar',
       model: ModelDescriptor(
         id: 'fake-final-asr',

@@ -61,7 +61,7 @@ void main() {
           requestedProfiles.add(profile);
           return switch (profile) {
             TranscriptionProfile.tunisianConversation => tunisian,
-            TranscriptionProfile.formalArabicSermon => formalArabic,
+            TranscriptionProfile.formalArabic => formalArabic,
           };
         },
         isDemo: false,
@@ -72,14 +72,14 @@ void main() {
     expect(find.text('تونسي • دون إنترنت'), findsOneWidget);
     await tester.tap(find.byKey(const Key('transcription-profile-selector')));
     await tester.pumpAndSettle();
-    await tester.tap(find.text('عربية فصحى • خطبة').last);
+    await tester.tap(find.text('عربية فصحى').last);
     await tester.pumpAndSettle();
 
     expect(tunisian.closed, isTrue);
-    expect(find.text('عربية فصحى • خطبة • دون إنترنت'), findsOneWidget);
+    expect(find.text('عربية فصحى • دون إنترنت'), findsOneWidget);
     expect(requestedProfiles, <TranscriptionProfile>[
       TranscriptionProfile.tunisianConversation,
-      TranscriptionProfile.formalArabicSermon,
+      TranscriptionProfile.formalArabic,
     ]);
   });
 }

@@ -5,7 +5,7 @@
 
 ## Context
 
-Field comparison against a time-aligned khutba transcript showed that overall
+Field comparison against a time-aligned formal-Arabic transcript showed that overall
 formal-Arabic recognition improved after language-constrained, guarded Qwen
 refinement. Remaining errors include both ordinary substitutions in the middle
 of a turn and occasional missing words at a turn boundary. Only the latter can
@@ -14,7 +14,7 @@ reintroducing hallucinations.
 
 ## Decision
 
-For the formal-Arabic sermon profile only, lower the Silero speech threshold
+For the formal-Arabic profile only, lower the Silero speech threshold
 from 0.5 to 0.4, require 800 ms of silence before finalization, and provide
 650 ms of retained real PCM on each side of the VAD segment. Keep the Tunisian
 conversation values unchanged. Preserve the guarded Vosk/Qwen arbitration and
@@ -33,7 +33,7 @@ do not reconstruct missing words from a language model.
 
 ## Field outcome
 
-Repeating the same khutba after installing this change produced a worse
+Repeating the same formal-Arabic recording after installing this change produced a worse
 transcript. The threshold, endpoint silence, and padding values were therefore
 restored to their pre-experiment settings. Further boundary changes require a
 captured Vosk/Qwen comparison rather than inference from the displayed text.

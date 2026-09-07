@@ -1,30 +1,30 @@
-# ADR 0029: Prolonged sermon phonation and refinement freshness
+# ADR 0029: Prolonged formal speech and refinement freshness
 
 - Status: Accepted
 - Date: 2026-09-06
 
 ## Context
 
-A repeated Android field replay included an imam sustaining words in the
-shahada for about three seconds. The streaming Vosk result contained a mixed
-Arabic/Latin corrupt token and unrelated words. Qwen recovered the intended
-sentence, but its result completed 4.1 seconds after the turn boundary and was
-discarded by the former four-second freshness limit. The user therefore saw
-the corrupt provisional card even after stopping the session.
+A repeated Android field replay included a speaker sustaining a word for about
+three seconds. The streaming Vosk result contained a corrupt mixed-script token
+and unrelated words. Qwen recovered the intended sentence, but its result
+completed 4.1 seconds after the turn boundary and was discarded by the former
+four-second freshness limit. The user therefore saw the corrupt provisional
+card even after stopping the session.
 
 ADR 0021 deliberately bypassed the existing sustained-phonation conditioner
 for Qwen. The diagnostic confirms that decision: with the original waveform,
-Qwen recovered the complete prolonged shahada accurately.
+Qwen recovered the complete prolonged word accurately.
 
 ## Decision
 
-Continue sending the original sermon waveform to Qwen. Keep the replaceable
-`SustainedPhonationCompressor` available only for final adapters that need it;
-Vosk streaming and speaker embeddings also continue to consume the original
-waveform.
+Continue sending the original formal-speech waveform to Qwen. Keep the
+replaceable `SustainedPhonationCompressor` available only for final adapters
+that need it; Vosk streaming and speaker embeddings also continue to consume
+the original waveform.
 
 Make final-result freshness profile-owned. Retain four seconds for ordinary
-conversation and allow eight seconds for formal sermons, so an already useful
+conversation and allow eight seconds for formal Arabic, so an already useful
 correction is not discarded just beyond the generic limit.
 
 Let the formal display normalizer reject a provisional hypothesis containing a

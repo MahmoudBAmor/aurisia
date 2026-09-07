@@ -1,26 +1,24 @@
-# ADR 0018: Sermon sustained-phonation conditioning
+# ADR 0018: Formal-speech sustained-phonation conditioning
 
 - Status: Accepted experimentally
 - Date: 2026-09-02
 
 ## Context
 
-Religious preaching and recitation can sustain a vowel for much longer than
-ordinary conversational speech, such as the prolonged vowel in
-`أشهد أن لا إله إلا الله`. Mobile testing reports recognition errors around
-these spans. A phrase-replacement table would hide model errors, risk changing
-unrelated religious speech, and would not generalize to other verses or
-expressions.
+Expressive speech can sustain a vowel for much longer than ordinary
+conversation. Mobile testing reports recognition errors around these spans. A
+phrase-replacement table would hide model errors, risk changing unrelated
+speech, and would not generalize to other words or speaking styles.
 
 The original waveform remains important for speaker attribution, and the live
 Vosk result must remain responsive. The existing formal-Arabic final gate can
-protect a good baseline from an unsupported Whisper rewrite.
+protect a good baseline from an unsupported second-pass rewrite.
 
 ## Decision
 
 Add a model-neutral `SpeechTurnPreprocessor` port and a transcription-engine
-decorator. Enable a `SustainedPhonationCompressor` only before the formal
-profile's final Whisper recognizer.
+decorator. Enable a `SustainedPhonationCompressor` only before a final
+recognizer whose evaluation shows that it benefits from the transform.
 
 Analyze non-overlapping 20 ms mono frames using RMS energy, zero-crossing rate,
 and normalized waveform slope. Treat only stable voiced runs of at least
@@ -29,10 +27,10 @@ complete span to approximately 560 ms, and crossfade the join. Do not transform
 short vowels, rapidly changing voiced audio, Tunisian conversation, streaming
 Vosk input, or speaker-embedding input.
 
-Continue applying the Vosk–Whisper agreement policy after recognition. A
-divergent result from transformed audio cannot replace the baseline merely
-because preprocessing was applied. Record duration metrics without recording
-audio or transcript text.
+Continue applying cross-model agreement after recognition. A divergent result
+from transformed audio cannot replace the baseline merely because
+preprocessing was applied. Record duration metrics without recording audio or
+transcript text.
 
 ## Consequences
 
@@ -43,6 +41,5 @@ audio or transcript text.
 - The transform is linear-time, local, offline, model-replaceable, and covered
   by synthetic signal tests.
 - Synthetic tests establish DSP boundaries, not recognition quality. The
-  threshold and benefit must be validated using consented recordings of real
-  sermons, including different pitches, microphones, rooms, and recitation
-  styles.
+  threshold and benefit must be validated using consented recordings with
+  different pitches, microphones, rooms, and expressive speaking styles.

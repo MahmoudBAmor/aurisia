@@ -7,8 +7,8 @@
 
 Android field testing exposed two failures after Qwen3-ASR became the shared
 final recognizer. The Tunisian profile sometimes returned complete French or
-Chinese sentences, while the sermon profile inserted fluent Arabic that was
-not spoken. A captured failure reproduced the configured sermon hotwords as a
+Chinese sentences, while the formal-Arabic profile inserted fluent Arabic that
+was not spoken. A captured failure reproduced the configured formal hotwords as a
 single fabricated result. Qwen hotwords are prompt context, not a constrained
 vocabulary, and both Qwen and the Vosk baseline currently provide no comparable
 confidence score.

@@ -4,7 +4,7 @@ import 'dart:typed_data';
 import '../../domain/ports/speech_turn_preprocessor.dart';
 import '../../domain/speech_turn.dart';
 
-/// Shortens only unusually long, stable voiced spans in sermon audio.
+/// Shortens only unusually long, stable voiced spans in expressive speech.
 ///
 /// Preachers may sustain a vowel far beyond durations represented in general
 /// ASR training data. This lightweight detector uses frame energy, zero-

@@ -5,9 +5,9 @@ void main() {
   test('removes the Audar language protocol prefix', () {
     expect(
       parseAudarTranscript(
-        'language Arabic<asr_text>لا إله إلا الله وحده لا شريك له',
+        'language Arabic<asr_text>تتغير درجات الحرارة مع الفصول',
       ),
-      'لا إله إلا الله وحده لا شريك له',
+      'تتغير درجات الحرارة مع الفصول',
     );
   });
 

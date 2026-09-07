@@ -14,7 +14,7 @@ from aurisia.services.speech.adapters import MoonshineOnnxSpeechEngine
 
 
 class _Result:
-    text = "  كي تبدا ديسبو باللهي كلمني  "
+    text = "  كي تبدا ديسبو كلمني  "
 
 
 class _Stream:
@@ -68,7 +68,7 @@ class MoonshineOnnxSpeechEngineTests(unittest.TestCase):
 
             hypothesis = engine.transcribe(_segment(), "aeb-TN")
 
-        self.assertEqual(hypothesis.text, "كي تبدا ديسبو باللهي كلمني")
+        self.assertEqual(hypothesis.text, "كي تبدا ديسبو كلمني")
         self.assertEqual(recognizer.decode_calls, 1)
         self.assertTrue(recognizer.asserts_same_stream)
         self.assertEqual(recognizer.stream.sample_rate, 16_000)

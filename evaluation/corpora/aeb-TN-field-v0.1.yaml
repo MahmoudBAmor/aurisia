@@ -32,7 +32,7 @@ cases:
 
   - id: call_when_available
     prompt_arabizi: "ki tebda dispo bellehi kallamni"
-    reference_arabic: "كي تبدا ديسبو باللهي كلمني"
+    reference_arabic: "كي تبدا ديسبو كلمني"
     code_switch_terms:
       - ["ديسبو", "dispo"]
 

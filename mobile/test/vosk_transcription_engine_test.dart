@@ -161,7 +161,7 @@ void main() {
                 'confidence': 0.72,
               },
               'finishStream' => <String, Object?>{
-                'text': 'السلام عليكم ورحمة الله',
+                'text': 'صباح الخير يا صديقي',
                 'confidence': 0.88,
               },
               _ => null,
@@ -199,7 +199,7 @@ void main() {
       ]);
       expect(partial.displayText, 'السلام عليكم');
       expect(partial.isFinal, isFalse);
-      expect(finalResult.displayText, 'السلام عليكم ورحمة الله');
+      expect(finalResult.displayText, 'صباح الخير يا صديقي');
       expect(finalResult.isFinal, isTrue);
     },
   );

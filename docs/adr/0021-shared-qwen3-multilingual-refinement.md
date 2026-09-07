@@ -7,7 +7,7 @@
 
 Android field testing found two related limitations in the packaged ASR
 composition. Audar-ASR-V1-Flash changed several nearly correct formal-Arabic
-results into worse sentences on sermon audio. The Tunisian LiNTO/Vosk decoder
+results into worse sentences on formal-Arabic audio. The Tunisian LiNTO/Vosk decoder
 also omitted or phonetically arabized embedded French and medicine terms such
 as `pharmacie` and `Panadol`. Display substitutions cannot reconstruct a word
 that is absent from the recognizer output.
@@ -27,13 +27,13 @@ inference never pauses microphone consumption or streaming partial text.
 
 Provide short, profile-owned hotword lists to the Qwen adapter. The Tunisian
 list contains common French loans and medicine terms; the formal list contains
-common religious expressions. Hotwords are comma-separated decoder context,
+general standard-Arabic terms. Hotwords are comma-separated decoder context,
 not post-recognition text replacements. The Arabic display normalizer remains
 a separate, conservative final formatting step.
 
 Do not apply the experimental sustained-phonation waveform compressor to
 Qwen3-ASR. The model explicitly supports singing and long vocal patterns, and
-altering sermon audio before a new field evaluation would confound the model
+altering formal-Arabic audio before a new field evaluation would confound the model
 comparison. The preprocessor remains replaceable for older final adapters.
 
 ## Consequences
@@ -45,7 +45,7 @@ comparison. The preprocessor remains replaceable for older final adapters.
 - The first launch copies and verifies a large model pack; later launches reuse
   the private installed copy and remain fully offline.
 - Generic hotwords should improve named terms but cannot prove Tunisian or
-  sermon accuracy. Representative consented audio and corrected references are
+  formal-Arabic accuracy. Representative consented audio and corrected references are
   still required for WER/CER and device-latency acceptance gates.
 - Audar, Whisper, and Omnilingual adapters remain replaceable comparison
   implementations, but their weights are excluded from the packaged APK.

@@ -5,10 +5,10 @@
 
 ## Context
 
-Android sermon testing repeatedly omitted complete opening or closing words,
-including the start of `إن في ذلك لعبرة لأولي الأبصار`, the opening of
-`وأشهد أن سيدنا محمدًا`, and the final `له` in
-`لا إله إلا الله وحده لا شريك له`.
+Android formal-Arabic testing repeatedly omitted complete opening or closing
+words. The affected recordings included explanatory prose, long vowels, and
+rhetorical pauses, showing that the problem was at the audio boundary rather
+than in one vocabulary domain.
 
 The native VAD returns a tightly delimited speech array for second-pass ASR and
 speaker attribution. Its endpoint is emitted only after trailing silence has
@@ -22,7 +22,7 @@ short prefix or suffix from the Vosk baseline.
 Decorate the VAD with a model-neutral `ContextPaddingSpeechSegmenter`. Retain a
 bounded chronological history of the original mono PCM and expand every
 completed turn using already-captured context: 250 ms on both sides for
-Tunisian conversation and 350 ms on both sides for formal sermons. Do not add
+Tunisian conversation and 350 ms on both sides for formal Arabic. Do not add
 an endpoint delay. Size history to the profile's maximum turn plus five
 seconds, and fall back to the original segment if a complete requested range
 is unavailable.
@@ -41,7 +41,7 @@ than Vosk, Whisper, VAD, or presentation.
 - Context is real microphone audio, not fabricated silence or phrase-specific
   text correction.
 - Up to roughly 25 seconds of mono 16 kHz float PCM is retained in memory for
-  the sermon profile, then discarded incrementally.
+  the formal-Arabic profile, then discarded incrementally.
 - Speaker embeddings receive a small amount of surrounding silence. Padding
   remains below the profile's required inter-turn silence, limiting adjacent-
   speaker contamination.

@@ -35,8 +35,6 @@ They are not necessarily part of the active mobile build:
 
 - Audar ASR uses the AudarAI Open License 1.0; its full license, notice, and
   model card are retained under `mobile/assets/model_packs/ar-audar/`.
-- The Quran Whisper conversion declares Apache-2.0 and retains a notice under
-  `mobile/assets/model_packs/ar-Quran-whisper-base-int8/`.
 - Omnilingual and generic Whisper manifests declare their provenance and
   licenses in their respective model-pack directories.
 - Moonshine non-English weights are evaluation-only because their community

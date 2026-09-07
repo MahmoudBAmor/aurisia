@@ -27,9 +27,8 @@ inference and retain only the newest waiting turn; superseded turns remain on
 their immediate Vosk result. Do not publish a final refinement after its
 freshness deadline.
 
-Remove the rejected Quran-recitation profile and specialist pack from the APK
-and selector. Retain generic ASR and preprocessing adapters for future
-experiments.
+Remove the rejected specialist profile and its model pack from the APK and
+selector. Retain generic ASR and preprocessing adapters for future experiments.
 
 ## Consequences
 

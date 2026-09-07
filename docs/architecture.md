@@ -186,15 +186,15 @@ For final adapters that need it, a replaceable
 `SpeechTurnPreprocessor` may shorten sustained phonation longer than 900 ms to
 about 560 ms. Detection uses bounded linear-time waveform features and a
 crossfaded cut; it does not infer or rewrite words. Vosk streaming and speaker
-embeddings always consume the original PCM. This experimental recitation
+embeddings always consume the original PCM. This experimental expressive-speech
 treatment remains isolated from presentation and identity. Qwen3 continues to
 receive the original waveform after correctly recovering a three-second
-prolonged shahada in field diagnostics. Conversation retains a four-second
-final-result freshness limit; sermons use eight seconds so a useful correction
-is not discarded just beyond the generic limit.
+prolonged vowel in field diagnostics. Conversation retains a four-second
+final-result freshness limit; formal Arabic uses eight seconds so a useful
+correction is not discarded just beyond the generic limit.
 
 Mobile endpoint silence is profile-specific: 500 ms for Tunisian conversation
-and 550 ms for formal sermons. Formal speech is forcibly finalized after 14
+and 550 ms for formal Arabic. Formal speech is forcibly finalized after 14
 seconds instead of 20 so CPU refinement work and visible delay remain bounded.
 Streaming partials remain immediate. These
 values favor enough lexical and vocal context to keep one sentence—and its

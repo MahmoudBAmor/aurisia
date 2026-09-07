@@ -7,10 +7,10 @@
 
 Opt-in Android diagnostics captured the streaming Vosk baseline, the Qwen3
 final result, and Aurisia's selected text for the same speech turn. In formal
-Arabic, Qwen produced substantially better text such as
-`وأشهد أن لا إله إلا الله وحده لا شريك له`, while the conservative boundary
-gate retained Vosk's `إلى إلا الله وحده لا شريكة`. Similar false rejections
-occurred around `المستبصرين` and `لأولي الأبصار`.
+Arabic, Qwen produced substantially better wording for several multiword
+sentences, while the conservative boundary gate retained visibly corrupted
+Vosk output. Similar false rejections occurred around scientific and
+explanatory vocabulary.
 
 The same diagnostics also confirmed why Qwen cannot be globally authoritative.
 A short `أما` baseline received a speculative longer completion, and previous

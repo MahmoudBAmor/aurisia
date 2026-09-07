@@ -19,7 +19,7 @@ second-pass result to replace a good visible transcript.
 ## Decision
 
 Use 500 ms endpoint silence for Tunisian conversation and 650 ms for formal
-sermons. Continue publishing changed streaming partials immediately. Keep the
+Arabic. Continue publishing changed streaming partials immediately. Keep the
 hard maximum-speech limit, so uninterrupted speech and memory remain bounded.
 
 Remove Tunisian lexical n-best selection from the production composition and

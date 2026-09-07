@@ -202,7 +202,7 @@ class _Header extends StatelessWidget {
 String _profileName(TranscriptionProfile profile) {
   return switch (profile) {
     TranscriptionProfile.tunisianConversation => 'تونسي',
-    TranscriptionProfile.formalArabicSermon => 'عربية فصحى • خطبة',
+    TranscriptionProfile.formalArabic => 'عربية فصحى',
   };
 }
 

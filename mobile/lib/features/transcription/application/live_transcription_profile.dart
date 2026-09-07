@@ -25,7 +25,7 @@ class LiveTranscriptionProfile {
   factory LiveTranscriptionProfile.forId(TranscriptionProfile id) {
     return switch (id) {
       TranscriptionProfile.tunisianConversation => tunisianConversation,
-      TranscriptionProfile.formalArabicSermon => formalArabicSermon,
+      TranscriptionProfile.formalArabic => formalArabic,
     };
   }
 
@@ -56,8 +56,8 @@ class LiveTranscriptionProfile {
     ),
   );
 
-  static const formalArabicSermon = LiveTranscriptionProfile(
-    id: TranscriptionProfile.formalArabicSermon,
+  static const formalArabic = LiveTranscriptionProfile(
+    id: TranscriptionProfile.formalArabic,
     minimumSilenceSeconds: 0.55,
     maximumSpeechSeconds: 14,
     maximumRefinementAge: Duration(seconds: 8),

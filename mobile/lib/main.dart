@@ -36,10 +36,10 @@ Future<TranscriptionSession> _loadSession(TranscriptionProfile profile) async {
   final primaryPack = await repository.load(
     assetRoot: switch (profile) {
       TranscriptionProfile.tunisianConversation => _androidVoskPackRoot,
-      TranscriptionProfile.formalArabicSermon => _formalArabicPackRoot,
+      TranscriptionProfile.formalArabic => _formalArabicPackRoot,
     },
   );
-  final refinerPack = profile == TranscriptionProfile.formalArabicSermon
+  final refinerPack = profile == TranscriptionProfile.formalArabic
       ? await repository.load(assetRoot: _multilingualRefinerPackRoot)
       : null;
   final primaryPaths = await materializer.materialize(primaryPack);

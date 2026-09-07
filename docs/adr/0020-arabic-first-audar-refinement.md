@@ -7,7 +7,7 @@
 
 Repeated Android field tests showed that MGB-2/Vosk plus multilingual Whisper
 Small could preserve phrase boundaries yet still misrecognize central words in
-sermons. Examples included common testimony and Qur'anic vocabulary. Tuning
+formal speech. Examples included scientific and explanatory vocabulary. Tuning
 silence, padding, or the cross-model agreement threshold cannot recover words
 that neither decoder recognizes correctly.
 

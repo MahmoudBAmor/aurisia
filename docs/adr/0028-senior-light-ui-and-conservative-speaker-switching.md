@@ -14,12 +14,12 @@ protection. The formal profile already used about 2.9 GB PSS on the reference
 phone, including substantial swap, so a larger generative model would worsen
 latency and memory pressure.
 
-A 2026-09-06 replay of the first roughly 2 minutes 40 seconds of the reference
-sermon measured 30.1% word error rate for Vosk, 21.2% for Qwen, and 20.7% for
+A 2026-09-06 replay of the first roughly 2 minutes 40 seconds of a reference
+formal-Arabic recording measured 30.1% word error rate for Vosk, 21.2% for Qwen, and 20.7% for
 the selected output against the supplied YouTube transcript. Replaying that
 same output through the evidence-derived formal lexicon measured 8.8%. This is
 an in-sample regression measurement, not a claim of general Fusha accuracy; a
-different sermon remains necessary for unbiased evaluation. All 25 turns in
+different recording remains necessary for unbiased evaluation. All 25 turns in
 that replay stayed on one speaker, with no false color split.
 
 ## Decision

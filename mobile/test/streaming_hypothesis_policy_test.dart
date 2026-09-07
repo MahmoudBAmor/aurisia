@@ -20,8 +20,8 @@ void main() {
     test('reset forgets hypotheses from the previous turn', () {
       final tracker = const StreamingHypothesisPolicy().createTracker();
       tracker
-        ..observe(_hypothesis('السلام عليكم', isFinal: false))
-        ..observe(_hypothesis('السلام عليكم', isFinal: false))
+        ..observe(_hypothesis('صباح الخير', isFinal: false))
+        ..observe(_hypothesis('صباح الخير', isFinal: false))
         ..reset();
 
       expect(tracker.latest, isNull);
@@ -54,15 +54,15 @@ void main() {
     });
 
     test('accepts a final that extends the stable partial', () {
-      final stable = _hypothesis('السلام عليكم', isFinal: false);
+      final stable = _hypothesis('صباح الخير', isFinal: false);
 
       final selection = policy.selectPrimaryFinal(
-        finalHypothesis: _hypothesis('السلام عليكم ورحمة الله'),
+        finalHypothesis: _hypothesis('صباح الخير يا صديقي'),
         stablePartial: stable,
         latestPartial: stable,
       );
 
-      expect(selection.hypothesis?.displayText, 'السلام عليكم ورحمة الله');
+      expect(selection.hypothesis?.displayText, 'صباح الخير يا صديقي');
       expect(selection.reason, HypothesisSelectionReason.finalExtension);
     });
 
@@ -99,11 +99,14 @@ void main() {
     const policy = StreamingHypothesisPolicy();
 
     test('protects a trusted baseline from a divergent refinement', () {
-      final baseline = _hypothesis('الحمد لله رب العالمين', confidence: 0.87);
+      final baseline = _hypothesis(
+        'التعليم أساس تقدم المجتمعات',
+        confidence: 0.87,
+      );
 
       final selection = policy.selectRefinement(
         baseline: baseline,
-        refinement: _hypothesis('اليوم نمشيو للجامع', confidence: 0.7),
+        refinement: _hypothesis('اليوم نذهب إلى المكتبة', confidence: 0.7),
       );
 
       expect(selection.hypothesis, same(baseline));
@@ -112,11 +115,11 @@ void main() {
 
     test('accepts an agreeing refinement', () {
       final selection = policy.selectRefinement(
-        baseline: _hypothesis('الحمد لله رب العالمين', confidence: 0.87),
-        refinement: _hypothesis('الحمد لله رب العلمين', confidence: 0.75),
+        baseline: _hypothesis('التعليم أساس تقدم المجتمعات', confidence: 0.87),
+        refinement: _hypothesis('التعليم أساس تقدم المجتمع', confidence: 0.75),
       );
 
-      expect(selection.hypothesis?.displayText, 'الحمد لله رب العلمين');
+      expect(selection.hypothesis?.displayText, 'التعليم أساس تقدم المجتمع');
       expect(selection.reason, HypothesisSelectionReason.refinementAgreement);
     });
 
@@ -125,13 +128,13 @@ void main() {
         minimumRefinementSimilarity: 0.5,
       );
       final baseline = _hypothesis(
-        'لا إله إلا الله وحده لا شريك له',
+        'تتغير درجات الحرارة خلال فصل الصيف',
         confidence: 0.8,
       );
 
       final selection = boundaryPolicy.selectRefinement(
         baseline: baseline,
-        refinement: _hypothesis('إلا الله وحده لا شريك'),
+        refinement: _hypothesis('درجات الحرارة خلال فصل'),
       );
 
       expect(selection.hypothesis, same(baseline));
@@ -145,13 +148,13 @@ void main() {
       const guardedPolicy = StreamingHypothesisPolicy(
         minimumRefinementSimilarity: 0.78,
       );
-      final baseline = _hypothesis('الحمد لله رب العالمين');
+      final baseline = _hypothesis('تختلف الظواهر الكونية');
 
       final selection = guardedPolicy.selectRefinement(
         baseline: baseline,
         refinement: _hypothesis(
-          'الحمد لله رب العالمين لا إله إلا الله وحده لا شريك له '
-          'محمد رسول الله أولي الأبصار',
+          'تختلف الظواهر الكونية باختلاف درجات الحرارة '
+          'والضغط وحركة الرياح عبر الفصول',
         ),
       );
 
@@ -161,13 +164,13 @@ void main() {
 
     test('allows minor spelling correction at transcript boundaries', () {
       final selection = policy.selectRefinement(
-        baseline: _hypothesis('وأشهد أن سيدنا محمدا رسول الله'),
-        refinement: _hypothesis('واشهد أن سيدنا محمد رسول الله'),
+        baseline: _hypothesis('تتغير درجات الحراره مع الفصول'),
+        refinement: _hypothesis('تتغير درجات الحرارة مع الفصول'),
       );
 
       expect(
         selection.hypothesis?.displayText,
-        'واشهد أن سيدنا محمد رسول الله',
+        'تتغير درجات الحرارة مع الفصول',
       );
       expect(selection.reason, HypothesisSelectionReason.refinementAgreement);
     });
@@ -175,7 +178,7 @@ void main() {
     test('protects even a weak baseline from an unscored rewrite', () {
       final selection = policy.selectRefinement(
         baseline: _hypothesis('كلام غير واضح', confidence: 0.42),
-        refinement: _hypothesis('السلام عليكم ورحمة الله'),
+        refinement: _hypothesis('الطقس جميل هذا الصباح'),
       );
 
       expect(selection.hypothesis?.displayText, 'كلام غير واضح');
@@ -185,10 +188,10 @@ void main() {
     test('permits a divergent refinement with a confidence advantage', () {
       final selection = policy.selectRefinement(
         baseline: _hypothesis('كلام غير واضح', confidence: 0.42),
-        refinement: _hypothesis('السلام عليكم ورحمة الله', confidence: 0.75),
+        refinement: _hypothesis('الطقس جميل هذا الصباح', confidence: 0.75),
       );
 
-      expect(selection.hypothesis?.displayText, 'السلام عليكم ورحمة الله');
+      expect(selection.hypothesis?.displayText, 'الطقس جميل هذا الصباح');
       expect(selection.reason, HypothesisSelectionReason.refinementConfidence);
     });
 
@@ -197,14 +200,11 @@ void main() {
         preferUnscoredRefinement: true,
       );
       final selection = preferredPolicy.selectRefinement(
-        baseline: _hypothesis('إلا هائلا الله وحده لا شريكة له'),
-        refinement: _hypothesis('لا إله إلا الله وحده لا شريك له'),
+        baseline: _hypothesis('كلام غير واضح تماما'),
+        refinement: _hypothesis('تؤثر الحرارة في حركة الرياح'),
       );
 
-      expect(
-        selection.hypothesis?.displayText,
-        'لا إله إلا الله وحده لا شريك له',
-      );
+      expect(selection.hypothesis?.displayText, 'تؤثر الحرارة في حركة الرياح');
       expect(selection.reason, HypothesisSelectionReason.preferredRefinement);
     });
 
@@ -214,22 +214,26 @@ void main() {
         minimumAlternativeConsensusSimilarity: 0.99,
       );
       final baseline = _hypothesis(
-        'إن الله واسع المغفرة وهو الغفور الرحيم',
+        'تؤثر درجات الحرارة في حركة الرياح السريعة',
         confidence: 0.48,
         alternatives: const <TranscriptCandidate>[
-          TranscriptCandidate(text: 'إن الله واسع المغفرة وهو الغفور الرحيم'),
-          TranscriptCandidate(text: 'إن الله واسع الرحمة وهو الغفور الرحيم'),
+          TranscriptCandidate(
+            text: 'تؤثر درجات الحرارة في حركة الرياح السريعة',
+          ),
+          TranscriptCandidate(
+            text: 'تؤثر درجات الرطوبة في حركة الرياح السريعة',
+          ),
         ],
       );
 
       final selection = consensusPolicy.selectRefinement(
         baseline: baseline,
-        refinement: _hypothesis('إن الله واسع الرحمة وهو الغفور الرحيم'),
+        refinement: _hypothesis('تؤثر درجات الرطوبة في حركة الرياح السريعة'),
       );
 
       expect(
         selection.hypothesis?.displayText,
-        'إن الله واسع الرحمة وهو الغفور الرحيم',
+        'تؤثر درجات الرطوبة في حركة الرياح السريعة',
       );
       expect(
         selection.reason,
@@ -244,18 +248,22 @@ void main() {
         maximumAlternativeConsensusRank: 2,
       );
       final baseline = _hypothesis(
-        'إن الله واسع المغفرة وهو الغفور الرحيم',
+        'تؤثر درجات الحرارة في حركة الرياح السريعة',
         confidence: 0.7,
         alternatives: const <TranscriptCandidate>[
-          TranscriptCandidate(text: 'إن الله واسع المغفرة وهو الغفور الرحيم'),
-          TranscriptCandidate(text: 'إن الله واسع الرحمة وهو الغفور الرحيم'),
-          TranscriptCandidate(text: 'إن الله كثير التوبة وهو الغفور الرحيم'),
+          TranscriptCandidate(
+            text: 'تؤثر درجات الحرارة في حركة الرياح السريعة',
+          ),
+          TranscriptCandidate(
+            text: 'تؤثر درجات الرطوبة في حركة الرياح السريعة',
+          ),
+          TranscriptCandidate(text: 'تؤثر درجات الضغط في حركة الرياح السريعة'),
         ],
       );
 
       final selection = consensusPolicy.selectRefinement(
         baseline: baseline,
-        refinement: _hypothesis('إن الله كثير التوبة وهو الغفور الرحيم'),
+        refinement: _hypothesis('تؤثر درجات الضغط في حركة الرياح السريعة'),
       );
 
       expect(selection.hypothesis, same(baseline));
@@ -263,75 +271,70 @@ void main() {
     });
 
     test('formal profile accepts the better captured Qwen correction', () {
-      final policy =
-          LiveTranscriptionProfile.formalArabicSermon.hypothesisPolicy;
+      final policy = LiveTranscriptionProfile.formalArabic.hypothesisPolicy;
 
       final selection = policy.selectRefinement(
-        baseline: _hypothesis('إلى إلا الله وحده لا شريكة'),
-        refinement: _hypothesis('وأشهد أن لا إله إلا الله وحده لا شريك له.'),
+        baseline: _hypothesis('تغير درجات الحرر في صيف'),
+        refinement: _hypothesis('تتغير درجات الحرارة في فصل الصيف.'),
       );
 
       expect(
         selection.hypothesis?.displayText,
-        'وأشهد أن لا إله إلا الله وحده لا شريك له.',
+        'تتغير درجات الحرارة في فصل الصيف.',
       );
       expect(selection.reason, HypothesisSelectionReason.preferredRefinement);
     });
 
     test('formal profile rejects a speculative completion of a short turn', () {
-      final policy =
-          LiveTranscriptionProfile.formalArabicSermon.hypothesisPolicy;
+      final policy = LiveTranscriptionProfile.formalArabic.hypothesisPolicy;
       final baseline = _hypothesis('أما');
 
       final selection = policy.selectRefinement(
         baseline: baseline,
-        refinement: _hypothesis('أما بعد فيا أيها المؤمنون الكرام'),
+        refinement: _hypothesis('أما اليوم فسنتحدث عن الظواهر الكونية'),
       );
 
       expect(selection.hypothesis, same(baseline));
       expect(selection.reason, HypothesisSelectionReason.baselineProtected);
     });
 
-    test('formal profile recovers a strongly cropped shahada', () {
-      final policy =
-          LiveTranscriptionProfile.formalArabicSermon.hypothesisPolicy;
+    test('formal profile recovers a strongly cropped sentence', () {
+      final policy = LiveTranscriptionProfile.formalArabic.hypothesisPolicy;
 
       final selection = policy.selectRefinement(
-        baseline: _hypothesis('هو وحدة شريكة'),
-        refinement: _hypothesis('وأشهد أن لا إله إلا الله وحده لا شريك له.'),
+        baseline: _hypothesis('حرارة فصل صيف'),
+        refinement: _hypothesis('تتغير درجات الحرارة في فصل الصيف.'),
       );
 
       expect(
         selection.hypothesis?.displayText,
-        'وأشهد أن لا إله إلا الله وحده لا شريك له.',
+        'تتغير درجات الحرارة في فصل الصيف.',
       );
       expect(selection.reason, HypothesisSelectionReason.preferredRefinement);
     });
 
-    test('formal profile recovers a cropped Quranic expression', () {
-      final policy =
-          LiveTranscriptionProfile.formalArabicSermon.hypothesisPolicy;
+    test('formal profile recovers a cropped expression', () {
+      final policy = LiveTranscriptionProfile.formalArabic.hypothesisPolicy;
 
       final selection = policy.selectRefinement(
-        baseline: _hypothesis('لأولي صار'),
-        refinement: _hypothesis('إن في ذلك لعبرة لأولي الأبصار.'),
+        baseline: _hypothesis('حركة الرياح'),
+        refinement: _hypothesis('تؤثر درجات الحرارة في حركة الرياح.'),
       );
 
       expect(
         selection.hypothesis?.displayText,
-        'إن في ذلك لعبرة لأولي الأبصار.',
+        'تؤثر درجات الحرارة في حركة الرياح.',
       );
       expect(selection.reason, HypothesisSelectionReason.preferredRefinement);
     });
 
     test('formal profile rejects repetitive generative output', () {
-      final policy =
-          LiveTranscriptionProfile.formalArabicSermon.hypothesisPolicy;
+      final policy = LiveTranscriptionProfile.formalArabic.hypothesisPolicy;
       final baseline = _hypothesis('في مثلا يعني');
 
       final selection = policy.selectRefinement(
         baseline: baseline,
-        refinement: _hypothesis('ما أجعلهم مثال مثال مثال مثال للمؤمنين'),
+        refinement: _hypothesis('ما أجعلهم مثال مثال مثال مثال للتلاميذ'),
       );
 
       expect(selection.hypothesis, same(baseline));
@@ -339,8 +342,7 @@ void main() {
     });
 
     test('formal profile rejects a duplicate introduced by refinement', () {
-      final policy =
-          LiveTranscriptionProfile.formalArabicSermon.hypothesisPolicy;
+      final policy = LiveTranscriptionProfile.formalArabic.hypothesisPolicy;
       final baseline = _hypothesis(
         'نظارات نظرات تأملية في بعض الظواهر الكونية',
       );
@@ -357,17 +359,16 @@ void main() {
     });
 
     test('formal profile preserves a repetition heard by both engines', () {
-      final policy =
-          LiveTranscriptionProfile.formalArabicSermon.hypothesisPolicy;
+      final policy = LiveTranscriptionProfile.formalArabic.hypothesisPolicy;
 
       final selection = policy.selectRefinement(
-        baseline: _hypothesis('أخص أخص بالذكر آية من آيات الله'),
-        refinement: _hypothesis('أخص أخص بالذكر آية من آيات الله.'),
+        baseline: _hypothesis('أخص أخص بالذكر ظاهرة اختلاف الفصول'),
+        refinement: _hypothesis('أخص أخص بالذكر ظاهرة اختلاف الفصول.'),
       );
 
       expect(
         selection.hypothesis?.displayText,
-        'أخص أخص بالذكر آية من آيات الله.',
+        'أخص أخص بالذكر ظاهرة اختلاف الفصول.',
       );
       expect(selection.reason, HypothesisSelectionReason.refinementAgreement);
     });
